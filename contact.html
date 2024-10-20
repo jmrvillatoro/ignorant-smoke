@@ -35,9 +35,31 @@
                 <label for="xss">Comment (XSS Test):</label>
                 <input type="text" id="xss" name="xss" value="<script>alert('XSS Vulnerability');</script>" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </form>
+
+        <!-- Mostrar los datos sin sanitización -->
+        <h2>Your Submitted Data:</h2>
+        <div id="submittedData">
+            <!-- Aquí se mostrará el contenido sin ninguna sanitización -->
+            <p>Name: <span id="submittedName"></span></p>
+            <p>Email: <span id="submittedEmail"></span></p>
+            <p>Phone: <span id="submittedPhone"></span></p>
+            <p>Comment: <span id="submittedXSS"></span></p>
+        </div>
     </div>
+
+    <script>
+        // Simular la recepción de datos sin sanitización
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById("submittedName").innerHTML = urlParams.get('fullname');
+        document.getElementById("submittedEmail").innerHTML = urlParams.get('email');
+        document.getElementById("submittedPhone").innerHTML = urlParams.get('phone');
+        document.getElementById("submittedXSS").innerHTML = urlParams.get('xss'); // Vulnerabilidad XSS aquí
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
